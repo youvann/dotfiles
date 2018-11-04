@@ -1,0 +1,31 @@
+[user]
+    name = youvann
+
+[color]
+    ui = auto
+    branch = auto
+    diff = auto
+    status = auto
+
+[color "branch"]
+    current = yellow reverse
+    local = yellow
+    remote = green
+
+[color "diff"]
+    meta = yellow
+    frag = magenta
+    old = red
+    new = green
+
+[color "status"]
+    added = green
+    changed = yellow
+    untracked = red
+
+[core]
+    ui = true
+    editor = vim
+    autocrlf = input
+    whitespace = trailing-space,space-before-tab
+
