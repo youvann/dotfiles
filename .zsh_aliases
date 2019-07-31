@@ -1,0 +1,108 @@
+# clear
+alias c='clear'
+
+# cd
+alias cd..='cd ..'
+alias ..='cd ..'
+alias ...='cd ../../../'
+alias ....='cd ../../../../'
+alias .....='cd ../../../../'
+
+# confirmation
+alias mv='mv -i'
+alias cp='cp -i'
+alias ln='ln -i'
+
+# grep
+alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+
+# ls
+alias ls='ls --color=auto'
+alias la='ls -la -G --color=auto'
+alias ls='ls -G --color=auto'
+alias ll='ls -l -G --color=auto'
+alias rm='rm -i'
+
+# vim
+alias vi='vim'
+
+# database 
+alias sync.db="psql -h localhost -p 9932 -U kmeas -d sync"
+alias sync.db.bkp="ssh -t oxlin-tools psql -h 'linxo-prod-db-worker-02.exploit.ec2.oxlin.net' -p 5432 -U kmeas -d sync"
+alias linxo.db.bkp="ssh -t oxlin-tools psql -h 'linxo-prod-db-replicator-01.exploit.ec2.oxlin.net' -p 5432 -U kmeas -d linxo"
+alias linxo.db="psql -h localhost -p 9942 -U kmeas -d linxo"
+alias linxo.qa.db="ssh -t oxlin-tools-01 psql -h 'linxo1-qa-db-pfm-01.exploit.ec2.oxlin.net' -p 5432 -U kmeas -d linxo"
+alias job.db="ssh -t oxlin-tools psql -h 'linxo-prod-db-replicator-01.exploit.ec2.oxlin.net' -p 5433 -U kmeas -d job"
+alias maif.linxo.db="ssh -t oxlin-tools psql -h 'maif-prd-db-replicator-02' -p 5432 -U kmeas -d linxo"
+alias maif.sync.db="ssh -t oxlin-tools psql -h 'maif-prd-db-worker-1' -p 5432 -U kevin -d sync"
+alias hsbc.linxo.db="ssh -t oxlin-tools psql -h 'hsbc-prod-db-pfm-01.exploit.ec2.oxlin.net' -p 5432 -U kmeas -d linxo"
+alias cas.sync.db="ssh -t oxlin-tools psql -h 'cas-prod-db-worker-01.exploit.ec2.oxlin.net' -p 5432 -U kmeas -d sync"
+alias b4b.sync.db="ssh -t oxlin-tools psql -h 'b4b-db-worker-1.exploit.ec2.oxlin.net' -p 5432 -U kmeas -d sync"
+
+alias hsbc.linxo.db="ssh -t oxlin-tools psql -h 'hsbc-prod-replicator-01.exploit.ec2.oxlin.net' -p 5432 -U kevin -d linxo"
+alias cats.linxo.db="ssh -t oxlin-tools psql -h 'cats-prod-db-replicator-01.exploit.ec2.oxlin.net' -p 5432 -U kevin -d linxo"
+
+# Docker
+alias d.ps='docker ps -a --format "table {{.ID}}\\t{{.Command}} ago\\t{{.RunningFor}}"\\t{{.Status}}\\t{{.Ports}}\\t{{.Names}}'
+alias d.psi="docker ps -a"
+alias d.psql.postgres="docker exec -it -u postgres dockercomposeelk_databases_1 bash"
+alias d.psql.root="docker exec -it dockercomposeelk_databases_1 bash"
+alias d.pfm="docker exec -it dockercomposeelk_pfm_1 bash"
+alias d.worker0="docker exec -it dockercomposeelk_worker0_1 bash"
+alias d.worker3="docker exec -it dockercomposeelk_worker1_1 bash"
+alias d.job="docker exec -it dockercomposeelk_job_1 bash"
+alias d.psql.pfm="docker exec -i -u postgres dockercomposeelk_databases_1 bash -c 'cd docker-entrypoint-initdb.d; psql -f 02-pfm.sql'"
+alias d.stop.elk="docker stop dockercomposeelk_elasticsearch_1 && docker stop dockercomposeelk_kibana_1"
+alias d.pfm.log="docker exec -i dockercomposeelk_pfm_1 bash -c 'cd /opt/linxo/pfm/logs/root'"
+alias d.worker3="docker exec -it dockercomposeelk_worker1_1 bash"
+alias d.reboot.pfm="docker stop dockercomposeelk_pfm_1 && d.build.elk.pfm && docker start dockercomposeelk_pfm_1 && d.ps"
+alias d.key="docker cp /Users/kevin/Workspace/app/docker/pfm/resources/linxo.key dockercomposeelk_pfm_1://opt/linxo/pfm/conf"
+alias d.rm.container="docker rm $(docker ps -a -q)"
+alias d.rm.image="docker rmi $(docker images -q)"
+
+# server
+alias ssh.upload='ssh 10.1.12.203'
+alias ssh.ansible='ssh 10.1.25.107'
+alias ssh.build='ssh -i ~/.ssh/vpc-init_1108.pem -l ubuntu 10.1.12.243'
+alias ssh.build2="ssh -o 'ProxyCommand ssh -q kevin@oxlin-tools nc %h 22' -o 'ForwardAgent yes' -o'User kevin' -i ~/.ssh/vpc-init_1108.pem -l ubuntu 10.1.12.241"
+alias ssh.logs='ssh -t kevin@10.1.12.247 "ssh kevin@10.111.14.89"'
+
+alias ssh.nestor.qa='ssh -t kevin@10.1.12.247 "ssh kevin@10.10.4.50"'
+alias ssh.nestor.prod='ssh -t kevin@10.1.12.247 "ssh kevin@10.11.1.10"'
+
+alias ssh.partners='ssh kevin@10.1.12.244'
+alias ssh.hsbc.oat='ssh -t kevin@10.1.12.247 "ssh kevin@10.24.1.50"'
+alias ssh.cats.dev='ssh -i ~/.ssh/cats-dev.pem ec2-user@52.213.77.131'
+
+alias ssh.linxo.preprod.db-pfm='ssh -t $VPN_IP -o "ForwardAgent=yes" ssh 10.135.10.10'
+alias ssh.linxo.preprod.db-worker='ssh -t $VPN_IP -o "ForwardAgent=yes" ssh 10.135.7.11'
+alias ssh.linxo.preprod.job='ssh -t $VPN_IP -o "ForwardAgent=yes" ssh 10.135.7.10'
+alias ssh.linxo.preprod.pfm='ssh -t $VPN_IP -o "ForwardAgent=yes" ssh 10.135.1.10'
+alias ssh.linxo.preprod.w0='ssh -t $VPN_IP -o "ForwardAgent=yes" ssh 10.135.13.12'
+alias ssh.linxo.preprod.w31='ssh -t $VPN_IP -o "ForwardAgent=yes" ssh 10.135.13.13'
+
+# sublime text
+alias subl='~/bin/sublime_text_3/sublime_text'
+alias pycharm='~/bin/pycharm/bin/pycharm.sh'
+alias idea='~/bin/idea-IC/bin/idea.sh'
+alias thunderbird='~/bin/thunderbird/thunderbird-bin &'
+alias spotify='~/bin/spotify/spotify &'
+alias arandr='~/bin/arandr/arandr &'
+alias postman='~/bin/Postman/Postman &'
+
+alias logs="cd /home/kevin/Workspace/linxo-tools/kon_tools/modules/server && python main_server.py"
+alias script="cd /home/kevin/Workspace/scripts"
+
+alias job="ssh -L 8443:linxo-prod-job-01.exploit.ec2.oxlin.net:8443 kevin@sysops-tools.infra.ec2.oxlin.net"
+alias jira="cd /home/kevin/Workspace/linxo-tools/kon_tools/modules/jira"
+
+alias ex="i3-msg exit"
+alias us="~/get-started/set_keyboard.sh us"
+alias fr="~/get-started/set_keyboard.sh fr"
+alias accent="~/get-started/set_keyboard_accent.sh"
+alias wallpaper="/data/wallpaper"
+alias listworkers="rd run --follow --id 9c8d3c92-b821-4c2b-934d-7708168e73b8"
+alias data="cd /data"
+alias control-center="env XDG_CURRENT_DESKTOP=GNOME gnome-control-center"
